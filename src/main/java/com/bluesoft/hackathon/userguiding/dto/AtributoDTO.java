@@ -1,6 +1,6 @@
 package com.bluesoft.hackathon.userguiding.dto;
 
-import com.bluesoft.hackathon.userguiding.model.Atributo;
+import com.bluesoft.hackathon.userguiding.model.UserGuidingAtributo;
 
 public class AtributoDTO {
 
@@ -24,7 +24,7 @@ public class AtributoDTO {
         this.value = value;
     }
 
-    public Atributo toEntity(){
-        return new Atributo(name, value);
+    public UserGuidingAtributo toEntity(){
+        return new UserGuidingAtributo(name, value);
     }
 }

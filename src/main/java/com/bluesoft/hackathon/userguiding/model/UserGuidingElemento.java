@@ -1,18 +1,21 @@
 package com.bluesoft.hackathon.userguiding.model;
 
-import com.bluesoft.hackathon.userguiding.dto.AtributoDTO;
-
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class Elemento {
+@Table(name = "user_guiding_elemento")
+public class UserGuidingElemento {
 
     @Id
-    private Long elementoId;
+    private Long userGuidingElementoKey;
 
     private String xpath;
 
@@ -26,37 +29,58 @@ public class Elemento {
 
     private String innerText;
 
-    private String baseURI;
+    private String baseUri;
 
-    @OneToMany
-    private List<Atributo> attributes;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_guiding_elemento_key")
+    private List<UserGuidingAtributo> userGuidingAtributos;
 
     private String intro;
 
-    private String date;
+    private Date data;
 
     private String texto;
 
-    public Elemento(String xpath, String cssSelector, String tagName, String id, String className, String innerText, String baseURI, List<Atributo> attributes, String intro, String date, String texto) {
+    public UserGuidingElemento(String xpath, String cssSelector, String tagName, String id, String className, String innerText, String baseURI, List<UserGuidingAtributo> attributes, String intro, String texto) {
         this.xpath = xpath;
         this.cssSelector = cssSelector;
         this.tagName = tagName;
         this.id = id;
         this.className = className;
         this.innerText = innerText;
-        this.baseURI = baseURI;
-        this.attributes = attributes;
+        this.baseUri = baseURI;
+        this.userGuidingAtributos = attributes;
         this.intro = intro;
-        this.date = date;
+        this.data = new Date();
         this.texto = texto;
     }
 
-    public Long getElementoId() {
-        return elementoId;
+    public UserGuidingElemento() {
+
     }
 
-    public void setElementoId(Long elementoId) {
-        this.elementoId = elementoId;
+    public Long getUserGuidingElementoKey() {
+        return userGuidingElementoKey;
+    }
+
+    public void setUserGuidingElementoKey(Long userGuidingElementoKey) {
+        this.userGuidingElementoKey = userGuidingElementoKey;
+    }
+
+    public String getBaseUri() {
+        return baseUri;
+    }
+
+    public void setBaseUri(String baseUri) {
+        this.baseUri = baseUri;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
     }
 
     public String getXpath() {
@@ -107,20 +131,12 @@ public class Elemento {
         this.innerText = innerText;
     }
 
-    public String getBaseURI() {
-        return baseURI;
+    public List<UserGuidingAtributo> getUserGuidingAtributos() {
+        return userGuidingAtributos;
     }
 
-    public void setBaseURI(String baseURI) {
-        this.baseURI = baseURI;
-    }
-
-    public List<Atributo> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(List<Atributo> attributes) {
-        this.attributes = attributes;
+    public void setUserGuidingAtributos(List<UserGuidingAtributo> userGuidingAtributos) {
+        this.userGuidingAtributos = userGuidingAtributos;
     }
 
     public String getIntro() {
@@ -129,14 +145,6 @@ public class Elemento {
 
     public void setIntro(String intro) {
         this.intro = intro;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getTexto() {

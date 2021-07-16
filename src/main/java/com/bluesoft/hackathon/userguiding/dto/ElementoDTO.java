@@ -1,7 +1,7 @@
 package com.bluesoft.hackathon.userguiding.dto;
 
-import com.bluesoft.hackathon.userguiding.model.Atributo;
-import com.bluesoft.hackathon.userguiding.model.Elemento;
+import com.bluesoft.hackathon.userguiding.model.UserGuidingAtributo;
+import com.bluesoft.hackathon.userguiding.model.UserGuidingElemento;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +19,10 @@ public class ElementoDTO {
     private String intro;
     private String date;
     private String texto;
+
+    public ElementoDTO(UserGuidingElemento userGuidingElemento) {
+        
+    }
 
     public String getXpath() {
         return xpath;
@@ -108,12 +112,12 @@ public class ElementoDTO {
         this.texto = texto;
     }
 
-    public Elemento toEntity() {
-        return new Elemento(xpath, cssSelector, tagName, id, className, innerText, baseURI, getAtributos(), intro, date, texto);
+    public UserGuidingElemento toEntity() {
+        return new UserGuidingElemento(xpath, cssSelector, tagName, id, className, innerText, baseURI, getAtributos(), intro, texto);
     }
 
-    private List<Atributo> getAtributos() {
-        List<Atributo> atributos = attributes.stream().map(AtributoDTO::toEntity).collect(Collectors.toList());
+    private List<UserGuidingAtributo> getAtributos() {
+        List<UserGuidingAtributo> atributos = attributes.stream().map(AtributoDTO::toEntity).collect(Collectors.toList());
         return atributos;
     }
 }
